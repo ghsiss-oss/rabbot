@@ -79,7 +79,7 @@
     "bole": "^3.0.2",
     "debug": "^3.1.0",
     "machina": "^4.0.2",
-    "monologue.js": "github:kylesferrazza/monologue.js",
+    "monologue.js": "github:ghsiss-oss/monologue.js",
     "postal": "^2.0.5",
     "uuid": "^3.1.0"
   },
