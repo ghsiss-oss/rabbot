@@ -60,7 +60,12 @@ var Factory = function (options, connection, topology, serializers, queueFn) {
       var emit = this.emit.bind(this);
 
       var unsubscriber = function () {
-        return queue.unsubscribe();
+        var self = this;
+        return queue
+          .unsubscribe()
+          .then(function () {
+            return self.transition('ready');
+          });
       };
 
       var onPurge = function (messageCount) {
@@ -83,7 +88,7 @@ var Factory = function (options, connection, topology, serializers, queueFn) {
           options.name,
           connection.name,
           queue.channel.tag);
-        this.unsubscribers.push(unsubscriber);
+        this.unsubscribers.push(unsubscriber.bind(this));
         this.handle('subscribed');
       }.bind(this);
 
